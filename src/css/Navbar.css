@@ -1,23 +1,27 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+
 #title {
     font-size: 16px;
     color: #000000;
     font-style: bold;
   }
   
-  #login-btn {
+#login-btn {
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 8px 22px;
     gap: 10px;
-  
     background: #3563E9;
     color: #FFFFFF;
     font-size: 14px;
     border-radius: 5px;
     border: 0;
     outline: 0;
-  
     flex: none;
     order: 1;
     flex-grow: 0;
@@ -31,13 +35,15 @@
     padding: 0;
     font-size: 14px;
     padding: auto;
-    align-items: center;
+    align-items: center; 
+    text-decoration: none;
   }
   
   .navbar {
     display: flex;
     flex-direction: row;
     padding: 10px;
+    text-decoration: none;
     position: relative;
     height: 79px;
   }
