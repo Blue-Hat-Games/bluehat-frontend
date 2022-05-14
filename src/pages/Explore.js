@@ -1,8 +1,12 @@
 import React from 'react';
+import Intro from '../components/Intro';
 
 const Explore = () => {
     return (
-        <a>Explore </a>
+        <div>
+            <h1>Explore</h1>
+            <Intro />
+        </div>
     )
 }
 

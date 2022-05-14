@@ -1,0 +1,17 @@
+.Page{
+    padding: 10%
+}
+
+.card{
+    padding : 10px;
+    margin: 10px;
+}
+
+.item-user{
+    color: #636363;
+    font-size: 12px;
+}
+
+.card-title{
+    font-size: 14px;
+}

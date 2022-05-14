@@ -1,0 +1,26 @@
+
+.download-container {
+    font-family: 'Alata', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 91px;
+    gap: 48px;
+
+    width: 1200px;
+    height: 376px;
+
+
+    /* light/secondary/a4 */
+
+    background: #ecf1fc;
+    border-radius: 15px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
