@@ -6,7 +6,7 @@ const Navbar = () => {
     return (
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid">
-                    <a class="nav-link active" aria-current="page" href="#" id='title'>Bluehat Games</a>
+                    <a class="nav-link active" aria-current="page" href="" id='title'>Bluehat Games</a>
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <Link to="/">
@@ -16,11 +16,6 @@ const Navbar = () => {
                         <li class="nav-item">
                             <Link to="/market">
                             <a class="nav-link">Market</a>
-                            </Link>
-                        </li>
-                        <li class="nav-item">
-                            <Link to="/feature">
-                            <a class="nav-link">Feature</a>
                             </Link>
                         </li>
                         <li class="nav-item">

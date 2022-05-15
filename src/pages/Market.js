@@ -1,15 +1,33 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../css/Market.css';
+import { Nav, Button } from 'react-bootstrap';
+import Navbar from '../components/Navbar';
+import { Link } from 'react-router-dom';
 
 class Market extends Component {
     state = {
         loading: false,
         ItemList: [],
-        img: ['images/bird.webp', 'images/cow.webp', 'images/duck.webp']
+        img: ['images/bird.webp', 'images/cow.webp', 'images/duck.webp'],
+        count: 0,
+        limit: 10,
+        page: 1,
+        order: 'Newest'
     };
+
+    getItemCount = async () => {
+        axios.get('/market/counts').then(({ data }) => {
+            this.setState({
+                count: data.data.totalCount
+            })
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
     loadItem = async () => {
-        axios.get('/market?order=Oldest&limit=20&page=1').then(({ data }) => {
+        axios.get(`/market/list?order=${this.state.order}&limit=${this.state.limit}&page=${this.state.page}`).then(({ data }) => {
             console.log(data);
             this.setState({ ItemList: data });
         }
@@ -19,51 +37,82 @@ class Market extends Component {
         })
     }
 
+    setPage = async (page) => {
+        await this.setState({ page: page })
+        this.loadItem();
+    }
+
+    Pagenation({ total, limit, page, setPage }) {
+        const numPages = Math.ceil(total / limit);
+        return (
+            <>
+                <Nav class='Pagenation'>
+                    <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
+                        &lt;
+                    </Button>
+                    {Array(numPages)
+                        .fill()
+                        .map((_, i) => (
+                            <Button
+                                key={i + 1}
+                                onClick={() => setPage(i + 1)}
+                                aria-current={page === i + 1 ? "page" : null}
+                            >
+                                {i + 1}
+                            </Button>
+                        ))}
+                    <Button onClick={() => setPage(page + 1)} disabled={page === numPages}>
+                        &gt;
+                    </Button>
+                </Nav>
+            </>
+        )
+    }
+
     componentDidMount() {
+        this.getItemCount();
         this.loadItem();
     }
 
     render() {
         return (
             <div>
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="true">
-                        Dropdown
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <li><button class="dropdown-item" type="button">Action</button></li>
-                        <li><button class="dropdown-item" type="button">Another action</button></li>
-                        <li><button class="dropdown-item" type="button">Something else here</button></li>
-                    </ul>
-                </div>
+                <Navbar />
                 <div className="item-list">
                     <div className="item-container" class='container'>
-                        <div className="item-list-title" class='row row-cols-5'>
+                        <div className="item-list-title" class='row row-cols-6'>
                             {this.state.ItemList.map(item => (
                                 <div className="item-wrap" class="card col">
-                                    <img src={this.state.img[Math.floor(Math.random() * this.state.img.length)]} class="card-img-top" alt="..."></img>
-                                    <div className="item-info" class="card-body">
-                                        <div className="item-user">{item.user_id}</div>
-                                        <div className="item-title" class="card-title">{item.name}</div>
-                                    </div>
+                                    <Link to={{
+                                        pathname: `/market/detail`,
+                                        search: `?id=${item.id}`
+                                    }}>
+                                        <img src={this.state.img[0]} class="card-img-top" alt="..."></img>
+                                        <div className="item-info" class="card-body">
+                                            <div className="item-user">{item.username}</div>
+                                            <div className="item-title">{item.animal_name}</div>
+                                            <table>
+                                                <tr>
+                                                    <td >
+                                                    <div className="item-price">Price : {item.price}</div>
+                                                    </td>
+                                                    <td className='td-end'>
+                                                    <div className="item-view">View : {item.view_count}</div>
+                                                    </td>
+                                                </tr>
+
+
+                                            </table>
+                                            
+                                            
+                                        </div>
+                                    </Link>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
-                <nav aria-label="Page navigation">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link">Previous</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="/market?page=1">1</a></li>
-                        <li class="page-item"><a class="page-link" href="/market?page=2">2</a></li>
-                        <li class="page-item"><a class="page-link" href="/market?page=3">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
+                <this.Pagenation total={this.state.count} limit={this.state.limit} page={this.state.page} setPage={this.setPage} />
             </div>
 
         )

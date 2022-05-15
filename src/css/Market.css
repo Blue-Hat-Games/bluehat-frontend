@@ -1,10 +1,11 @@
+
 .Page{
-    padding: 10%
+    padding: 5%;
 }
 
 .card{
-    padding : 10px;
-    margin: 10px;
+    padding : 5px;
+    margin: 10px
 }
 
 .item-user{
@@ -12,6 +13,38 @@
     font-size: 12px;
 }
 
-.card-title{
+.item-price{
+    color: #636363;
+    font-size: 12px;
+    text-align: end;
+}
+
+.item-title{
+    color: #282828;
     font-size: 14px;
 }
+
+.item-view{
+    color: #636363;
+    font-size: 12px;
+    text-align: end;
+}
+
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+th,td{
+    text-align: left;
+}
+.td-end{
+    text-align: right;
+}
+.Pagenation{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+

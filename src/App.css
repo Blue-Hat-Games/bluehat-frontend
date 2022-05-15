@@ -1,7 +1,10 @@
 .App {
   text-align: center;
 }
-
+*{
+  text-decoration-line: none !important;
+  color: inherit;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
