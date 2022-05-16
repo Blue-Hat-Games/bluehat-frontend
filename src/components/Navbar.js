@@ -1,16 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../css/Navbar.css';
 import {Link} from 'react-router-dom';
 
 const Navbar = () => {
+
+    const[selected, setSelected] = useState("nav-link-click");
+
     return (
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid">
-                    <a class="nav-link active" aria-current="page" href="" id='title'>Bluehat Games</a>
+                    <a className="nav-link" aria-current="page" href="/" id='title'>Bluehat Games</a>
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <Link to="/">
-                            <a class="nav-link-click">Explore</a>
+                            <a class="nav-link">Explore</a>
                             </Link>
                         </li>
                         <li class="nav-item">

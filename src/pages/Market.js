@@ -28,7 +28,6 @@ class Market extends Component {
 
     loadItem = async () => {
         axios.get(`/market/list?order=${this.state.order}&limit=${this.state.limit}&page=${this.state.page}`).then(({ data }) => {
-            console.log(data);
             this.setState({ ItemList: data });
         }
         ).catch(err => {
@@ -84,8 +83,7 @@ class Market extends Component {
                             {this.state.ItemList.map(item => (
                                 <div className="item-wrap" class="card col">
                                     <Link to={{
-                                        pathname: `/market/detail`,
-                                        search: `?id=${item.id}`
+                                        pathname: `/market/detail/${item.id}`
                                     }}>
                                         <img src={this.state.img[0]} class="card-img-top" alt="..."></img>
                                         <div className="item-info" class="card-body">
@@ -100,11 +98,7 @@ class Market extends Component {
                                                     <div className="item-view">View : {item.view_count}</div>
                                                     </td>
                                                 </tr>
-
-
                                             </table>
-                                            
-                                            
                                         </div>
                                     </Link>
                                 </div>

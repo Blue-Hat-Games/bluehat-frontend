@@ -9,6 +9,7 @@ import About from './pages/About'
 import { createBrowserHistory } from 'history';
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import PostView from './pages/PostView';
+import User from './pages/User';
 
 import { Link, Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 
@@ -23,16 +24,15 @@ const parseJwt = (token) => {
 function App() {
   const [user, setUser] = useState();
   let history = createBrowserHistory();
-  history.listen((location, action) => {
-    const user = JSON.parse(localStorage.getItem('user'));
+  const token =  JSON.parse(JSON.parse(localStorage.getItem("user")));
+  console.log(user);
     if (user) {
       const decoded = parseJwt(user.acessToken);
       if (decoded.exp < Date.now() / 1000) {
         localStorage.removeItem('user');
         setUser(null);
       }
-    }
-  });
+  }
 
   const authHeader = () => {
     const user = JSON.parse(JSON.parse(localStorage.getItem("user")));
@@ -50,8 +50,8 @@ function App() {
         <Route path="/market" element={<Market />} />
         <Route path="/download" element={<Download />} />
         <Route path="/about" element={<About />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/market/detail" element={<PostView/>} />
+      {!user ?  <Route path="/login" element={<Login />} /> : <Route path="/user" element={<User/>} />}
+        <Route path="/market/detail/:id" element={<PostView/>} />
       </Routes>
 
     </Router>

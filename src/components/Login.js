@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Redirect } from "react";
 import React, { Component } from 'react';
 import axios from "axios";
 import '../css/Login.css';
@@ -6,10 +6,10 @@ import '../css/Login.css';
 
 function Login() {
     const [inputEmail, setInputEmail] = useState("");
-    let [loginStatus, setLoginStatus] = useState("Login");
+    let [loginStatus, setLoginStatus] = useState("Verify");
 
     const handleLoginStatus = async () => {
-        setLoginStatus("Send");
+        setLoginStatus("Login");
     }
 
     const handleEmailChange = (e) => {
@@ -17,7 +17,7 @@ function Login() {
     }
 
     const onClickLogin = () => {
-        if (loginStatus === "Login") {
+        if (loginStatus === "Verify") {
             axios.post("/auth", {
                 email: inputEmail
             }).then(res => {
@@ -29,7 +29,7 @@ function Login() {
             }).catch(err => {
                 console.log(err);
             })
-        } else if (loginStatus === "Send") {
+        } else if (loginStatus === "Login") {
             axios.post("/users", {
                 email: inputEmail,
                 "wallet_address": "ahahahaahahahahaah",
@@ -37,12 +37,11 @@ function Login() {
             }).then(res => {
                 console.log(res);
                 if (res.status === 200 || res.status === 201) {
-                    console.log("로그인 성공");
                     const data = JSON.stringify({accessToken : res.data.access_token});
-                    console.log(data);
                     localStorage.setItem("user", JSON.stringify(data));
-                    console.log(localStorage.getItem("user"));
-                }
+                    return <Redirect to="/" />
+
+                        }
             }).catch(err => {
                 console.log(err);
             })
@@ -73,7 +72,7 @@ function Login() {
                         </div>
                     </div>
                     <div class="login-btn-wrap">
-                        <button class="login-btn" onClick={onClickLogin}>Login</button>
+                        <button class="login-btn" onClick={onClickLogin}>{loginStatus}</button>
                     </div>
                 </div>
             </div>

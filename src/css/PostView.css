@@ -1,0 +1,19 @@
+#buy-button{
+    background-color: #3563E9;
+    color: white;
+
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 22px;
+    gap: 10px;
+    background: #3563E9;
+    color: #FFFFFF;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 0;
+    outline: 0;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+
+}
