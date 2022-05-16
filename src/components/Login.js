@@ -1,4 +1,5 @@
-import { useState, useEffect, Redirect } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import React, { Component } from 'react';
 import axios from "axios";
 import '../css/Login.css';
@@ -7,7 +8,8 @@ import '../css/Login.css';
 function Login() {
     const [inputEmail, setInputEmail] = useState("");
     let [loginStatus, setLoginStatus] = useState("Verify");
-
+    const navigate = useNavigate();
+    
     const handleLoginStatus = async () => {
         setLoginStatus("Login");
     }
@@ -37,11 +39,12 @@ function Login() {
             }).then(res => {
                 console.log(res);
                 if (res.status === 200 || res.status === 201) {
-                    const data = JSON.stringify({accessToken : res.data.access_token});
+                    const data = JSON.stringify({ accessToken: res.data.access_token });
                     localStorage.setItem("user", JSON.stringify(data));
-                    return <Redirect to="/" />
+                    
+                    navigate("/");
 
-                        }
+                }
             }).catch(err => {
                 console.log(err);
             })
