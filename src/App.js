@@ -10,8 +10,10 @@ import { createBrowserHistory } from 'history';
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import PostView from './pages/PostView';
 import User from './pages/User';
-
+import Profile from './pages/Profile';
 import { Link, Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import UploadAnimal from './pages/UploadAnimal';
+
 
 const parseJwt = (token) => {
   try {
@@ -50,13 +52,12 @@ function App() {
         <Route path="/market" element={<Market />} />
         <Route path="/download" element={<Download />} />
         <Route path="/about" element={<About />} />
-      {!user ?  <Route path="/login" element={<Login />} /> : <Route path="/user" element={<User/>} />}
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile/>} />
         <Route path="/market/detail/:id" element={<PostView/>} />
+        <Route path="/market/upload/:id" element={<UploadAnimal/>} />
       </Routes>
-
     </Router>
-
-
   );
 }
 

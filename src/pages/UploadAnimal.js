@@ -13,19 +13,23 @@ const authHeader = () => {
     }
 };
 
-class PostView extends Component {
+class UploadAnimal extends Component {
     state = {
         loading: false,
         post: {},
         loading: false,
         id: window.location.href.split('/')[5],
+        inputPrice : 0
     };
 
 
     getPostData = async () => {
-        await axios.get(`/market?id=${this.state.id}`).then(({ data }) => {
+        await axios.get(`/nft/user/animal/${this.state.id}`,{
+            headers: authHeader()
+        }).then(({ data }) => {
+            console.log(data)
             this.setState({
-                post: data.data
+                post: data
             })
             console.log(this.state.post);
         }).catch(err => {
@@ -33,16 +37,25 @@ class PostView extends Component {
         })
     }
 
-    onClickBuyButton = async () => {
-        await axios.post('/market/buy', {
-            buy_animal_id: this.state.id
+    onClickSellButton = async () => {
+        await axios.post('/market/sell', {
+            "animal_id": this.state.id,
+            "price" : 11,
+            "seller_private_key" : "adsfasdf"
             },{
                 headers: authHeader()
             }).then(({ data }) => {
             console.log(data);
+            alert('Sell Success');
         }).catch(err => {
             console.log(err);
         });
+    }
+
+    handlePriceChange = (event) => {
+        this.setState({
+            inputPrice: event.target.value
+        })
     }
 
 
@@ -57,13 +70,11 @@ class PostView extends Component {
                 <Navbar />
                 <div class="row featurette">
                     <div class="col-md-7 order-md-2">
-                        <h2 class="featurette-heading">{this.state.post.animal_name}</h2>
+                        <h2 class="featurette-heading">{this.state.post.name}</h2>
                         <span class="text-muted">{this.state.post.username}</span>
-                        <p class="lead">{this.state.post.description} Waking up for the sunrise is always epic. Or that's how the pictures make it look like. Truth is waking up is a struggle but the rewards, that's something else.</p>
-                        <div>
-                        <span class="text-muted">View : {this.state.post.view_count}</span>
-                        </div>
-                        <a id="buy-button" class="btn btn-secondary" onClick={this.onClickBuyButton}>Buy NFT</a>
+                        <p class="lead"> nft_hash : {this.state.post.nft_hash}</p>
+                            <input placeholder="Price" type="text" name='input_price' value={this.inputPrice} onChange={this.handlePriceChange} />
+                        <a id="buy-button" class="btn btn-secondary" onClick={this.onClickSellButton}>Sell</a>
                         </div>
                         
                     <div class="col-md-5 order-md-1">
@@ -78,5 +89,4 @@ class PostView extends Component {
 }
 
 
-export default PostView;
-
+export default UploadAnimal;
