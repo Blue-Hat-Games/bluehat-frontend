@@ -4,12 +4,22 @@ import React, { Component } from 'react';
 import axios from "axios";
 import '../css/Login.css';
 
+function isValidEmail(emailStr) {
+    var regExp =
+        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    if (emailStr.match(regExp) != null) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 function Login() {
     const [inputEmail, setInputEmail] = useState("");
     let [loginStatus, setLoginStatus] = useState("Verify");
     const navigate = useNavigate();
-    
+
     const handleLoginStatus = async () => {
         setLoginStatus("Login");
     }
@@ -19,6 +29,7 @@ function Login() {
     }
 
     const onClickLogin = () => {
+        if (isValidEmail(inputEmail)) {
         if (loginStatus === "Verify") {
             axios.post("/auth", {
                 email: inputEmail
@@ -41,7 +52,7 @@ function Login() {
                 if (res.status === 200 || res.status === 201) {
                     const data = JSON.stringify({ accessToken: res.data.access_token });
                     localStorage.setItem("user", JSON.stringify(data));
-                    
+
                     navigate("/");
 
                 }
@@ -49,6 +60,9 @@ function Login() {
                 console.log(err);
             })
         }
+    } else {
+        alert('이메일 형식이 올바르지 않습니다.');
+    }
 
     }
 
