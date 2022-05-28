@@ -78,7 +78,7 @@ class Market extends Component {
             <div>
                 <Navbar />
                 <div className="item-list">
-                    <div className="item-container" class='container'>
+                    <div className="item-container" class='card-group'>
                         <div className="item-list-title" class='row row-cols-6'>
                             {this.state.ItemList.map(item => (
                                 <div className="item-wrap" class="card col">
