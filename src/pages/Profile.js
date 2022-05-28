@@ -16,6 +16,7 @@ const authHeader = () => {
 };
 
 class Profile extends Component {
+    navigate = useNavigate();
     state = {
         loading: false,
         ItemList: [],
@@ -33,8 +34,7 @@ class Profile extends Component {
         if (user && user.accessToken) {
             this.setState({ login: true});
         } else {
-            const navigate = useNavigate();
-            navigate("/login");
+            this.navigate("/login");
         }
     }
 
@@ -65,6 +65,12 @@ class Profile extends Component {
     setPage = async (page) => {
         await this.setState({ page: page })
         this.loadItem();
+    }
+
+    logout = async () => {
+        localStorage.removeItem('user');
+        alert('logout');
+        this.navigate("/");
     }
 
     Pagenation({ total, limit, page, setPage }) {
@@ -126,6 +132,8 @@ class Profile extends Component {
                     </div>
                 </div>
                 <this.Pagenation total={this.state.count} limit={this.state.limit} page={this.state.page} setPage={this.setPage} />
+
+                <Button onClick={this.logout}>Logout</Button>
             </div>
 
         )
