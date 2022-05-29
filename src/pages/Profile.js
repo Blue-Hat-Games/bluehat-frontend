@@ -16,7 +16,6 @@ const authHeader = () => {
 };
 
 class Profile extends Component {
-    navigate = useNavigate();
     state = {
         loading: false,
         ItemList: [],
@@ -26,7 +25,7 @@ class Profile extends Component {
         page: 1,
         order: 'Newest',
         login: false,
-        headers: {}
+        headers: {},
     };
 
     checkLogin = async () => {
@@ -34,7 +33,9 @@ class Profile extends Component {
         if (user && user.accessToken) {
             this.setState({ login: true});
         } else {
-            this.navigate("/login");
+            alert('Please login first');
+            const navigate = useNavigate();
+            navigate("/login");
         }
     }
 
@@ -70,7 +71,6 @@ class Profile extends Component {
     logout = async () => {
         localStorage.removeItem('user');
         alert('logout');
-        this.navigate("/");
     }
 
     Pagenation({ total, limit, page, setPage }) {
