@@ -37,6 +37,7 @@ function Login() {
                 console.log(res);
                 if (res.status === 200) {
                     console.log("이메일 전송 성공");
+                    alert('이메일을 확인해주세요.')
                     handleLoginStatus();
                 }
             }).catch(err => {
