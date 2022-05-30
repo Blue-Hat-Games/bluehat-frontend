@@ -46,16 +46,12 @@ function Login() {
         } else if (loginStatus === "Login") {
             axios.post("/users", {
                 email: inputEmail,
-                "wallet_address": "ahahahaahahahahaah",
-                "username": "hello"
             }).then(res => {
                 console.log(res);
                 if (res.status === 200 || res.status === 201) {
                     const data = JSON.stringify({ accessToken: res.data.access_token });
                     localStorage.setItem("user", JSON.stringify(data));
-
                     navigate("/");
-
                 }
             }).catch(err => {
                 console.log(err);
