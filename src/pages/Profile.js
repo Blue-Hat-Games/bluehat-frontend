@@ -5,6 +5,7 @@ import '../css/Market.css';
 import { Nav, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../components/Footer';
 
 const authHeader = () => {
     const user = JSON.parse(JSON.parse(localStorage.getItem("user")));
@@ -26,6 +27,8 @@ class Profile extends Component {
         order: 'Newest',
         login: false,
         headers: {},
+        username : '',
+        usercoin : 0
     };
 
     checkLogin = async () => {
@@ -37,6 +40,19 @@ class Profile extends Component {
             const navigate = useNavigate();
             navigate("/login");
         }
+    }
+
+    getUserInfo = async () => {
+        axios.get('/users', {
+            headers: authHeader()
+        }).then(({ data }) => {
+            this.setState({
+                username: data.username,
+                usercoin: data.coin
+            })
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     getUserItemCount = async () => {
@@ -102,6 +118,7 @@ class Profile extends Component {
 
     componentDidMount() {
         this.checkLogin();
+        this.getUserInfo();
         this.getUserItemCount();
         this.loadUserItem();
     }
@@ -110,8 +127,14 @@ class Profile extends Component {
         return (
             <div>
                 <Navbar />
-
-
+                <div className="user-info">
+                        <h3 className='user-name'>{this.state.username}</h3>
+                        <h6>Created at 4 month ago</h6>
+                        <h6>4 items</h6>
+                        <h6>Coin : {this.state.usercoin}</h6>
+                        <h6></h6>
+                        <Button onClick={this.logout}>Logout</Button>
+                    </div>
                 <div className="item-list">
                     <div className="item-container" class='container'>
                         <div className="item-list-title" class='row row-cols-6'>
@@ -132,8 +155,9 @@ class Profile extends Component {
                     </div>
                 </div>
                 <this.Pagenation total={this.state.count} limit={this.state.limit} page={this.state.page} setPage={this.setPage} />
+                <Footer/>
 
-                <Button onClick={this.logout}>Logout</Button>
+                
             </div>
 
         )
