@@ -2,7 +2,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function (app) {
     app.use('/', createProxyMiddleware({
-        target: 'http://bluehat.games',
+        target: 'http://api.bluehat.games',
         pathRewrite: {
             '^/': ''
         }
