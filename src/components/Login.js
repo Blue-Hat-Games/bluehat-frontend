@@ -19,6 +19,7 @@ function Login() {
     let [loginStatus, setLoginStatus] = useState("Verify");
     const navigate = useNavigate();
     const email = window.location.href.split('/login?email=')[1]
+    console.log(email)
     if (email) {
         axios.post("/api/users", {
             email: inputEmail,
