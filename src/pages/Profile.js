@@ -42,7 +42,7 @@ class Profile extends Component {
     }
 
     getUserInfo = async () => {
-        axios.get('/users', {
+        axios.get('/api/users', {
             headers: authHeader()
         }).then(({data}) => {
             this.setState({
@@ -55,7 +55,7 @@ class Profile extends Component {
     }
 
     getUserItemCount = async () => {
-        axios.get('/nft/user/animal/count', {
+        axios.get('/api/nft/user/animal/count', {
             headers: authHeader()
         }).then(({data}) => {
             this.setState({
@@ -67,7 +67,7 @@ class Profile extends Component {
     }
 
     loadUserItem = async () => {
-        axios.get(`/nft/user/animal?order=${this.state.order}&limit=${this.state.limit}&page=${this.state.page}`, {
+        axios.get(`/api/nft/user/animal?order=${this.state.order}&limit=${this.state.limit}&page=${this.state.page}`, {
             headers: authHeader()
         }).then(({data}) => {
                 this.setState({ItemList: data});

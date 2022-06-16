@@ -23,7 +23,7 @@ class PostView extends Component {
 
 
     getPostData = async () => {
-        await axios.get(`/market?id=${this.state.id}`).then(({data}) => {
+        await axios.get(`/api/market?id=${this.state.id}`).then(({data}) => {
             this.setState({
                 post: data.data
             })
@@ -34,7 +34,7 @@ class PostView extends Component {
     }
 
     onClickBuyButton = async () => {
-        await axios.post('/market/buy', {
+        await axios.post('/api/market/buy', {
             buy_animal_id: this.state.id
         }, {
             headers: authHeader()

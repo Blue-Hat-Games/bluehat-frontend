@@ -30,7 +30,7 @@ function Login() {
     const onClickLogin = () => {
         if (isValidEmail(inputEmail)) {
             if (loginStatus === "Verify") {
-                axios.post("/auth", {
+                axios.post("/api/auth", {
                     email: inputEmail
                 }).then(res => {
                     console.log(res);
@@ -43,7 +43,7 @@ function Login() {
                     console.log(err);
                 })
             } else if (loginStatus === "Login") {
-                axios.post("/users", {
+                axios.post("/api/users", {
                     email: inputEmail,
                 }).then(res => {
                     console.log(res);

@@ -24,7 +24,7 @@ class UploadAnimal extends Component {
 
 
     getPostData = async () => {
-        await axios.get(`/nft/user/animal/${this.state.id}`, {
+        await axios.get(`/api/nft/user/animal/${this.state.id}`, {
             headers: authHeader()
         }).then(({data}) => {
             console.log(data)
@@ -38,7 +38,7 @@ class UploadAnimal extends Component {
     }
 
     onClickSellButton = async () => {
-        await axios.post('/market/sell', {
+        await axios.post('/api/market/sell', {
             "animal_id": this.state.id,
             "price": 11,
             "seller_private_key": "adsfasdf"
