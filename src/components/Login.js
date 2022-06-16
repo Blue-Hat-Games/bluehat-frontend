@@ -22,7 +22,7 @@ function Login() {
     console.log(email)
     if (email) {
         axios.post("/api/users", {
-            email: inputEmail,
+            email: email,
         }).then(res => {
             console.log(res);
             if (res.status === 200 || res.status === 201) {
