@@ -17,7 +17,7 @@ class Market extends Component {
     };
 
     getItemCount = async () => {
-        axios.get('/market/counts').then(({data}) => {
+        axios.get('/api/market/counts').then(({data}) => {
             this.setState({
                 count: data.data.totalCount
             })
@@ -27,7 +27,7 @@ class Market extends Component {
     }
 
     loadItem = async () => {
-        axios.get(`/market/list?order=${this.state.order}&limit=${this.state.limit}&page=${this.state.page}`).then(({data}) => {
+        axios.get(`/api/market/list?order=${this.state.order}&limit=${this.state.limit}&page=${this.state.page}`).then(({data}) => {
                 this.setState({ItemList: data});
             }
         ).catch(err => {
