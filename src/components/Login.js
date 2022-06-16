@@ -18,6 +18,21 @@ function Login() {
     const [inputEmail, setInputEmail] = useState("");
     let [loginStatus, setLoginStatus] = useState("Verify");
     const navigate = useNavigate();
+    const email = window.location.href.split('/login?email=')[1]
+    if (email) {
+        axios.post("/api/users", {
+            email: inputEmail,
+        }).then(res => {
+            console.log(res);
+            if (res.status === 200 || res.status === 201) {
+                const data = JSON.stringify({accessToken: res.data.access_token});
+                localStorage.setItem("user", JSON.stringify(data));
+                navigate("/");
+            }
+        }).catch(err => {
+            console.log(err);
+        })
+    }
 
     const handleLoginStatus = async () => {
         setLoginStatus("Login");
