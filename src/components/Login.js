@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
-import React, { Component } from 'react';
+import React, {useState} from "react";
+import {useNavigate} from 'react-router-dom';
 import axios from "axios";
 import '../css/Login.css';
 
@@ -30,36 +29,36 @@ function Login() {
 
     const onClickLogin = () => {
         if (isValidEmail(inputEmail)) {
-        if (loginStatus === "Verify") {
-            axios.post("/auth", {
-                email: inputEmail
-            }).then(res => {
-                console.log(res);
-                if (res.status === 200) {
-                    console.log("이메일 전송 성공");
-                    alert('이메일을 확인해주세요.')
-                    handleLoginStatus();
-                }
-            }).catch(err => {
-                console.log(err);
-            })
-        } else if (loginStatus === "Login") {
-            axios.post("/users", {
-                email: inputEmail,
-            }).then(res => {
-                console.log(res);
-                if (res.status === 200 || res.status === 201) {
-                    const data = JSON.stringify({ accessToken: res.data.access_token });
-                    localStorage.setItem("user", JSON.stringify(data));
-                    navigate("/");
-                }
-            }).catch(err => {
-                console.log(err);
-            })
+            if (loginStatus === "Verify") {
+                axios.post("/auth", {
+                    email: inputEmail
+                }).then(res => {
+                    console.log(res);
+                    if (res.status === 200) {
+                        console.log("이메일 전송 성공");
+                        alert('이메일을 확인해주세요.')
+                        handleLoginStatus();
+                    }
+                }).catch(err => {
+                    console.log(err);
+                })
+            } else if (loginStatus === "Login") {
+                axios.post("/users", {
+                    email: inputEmail,
+                }).then(res => {
+                    console.log(res);
+                    if (res.status === 200 || res.status === 201) {
+                        const data = JSON.stringify({accessToken: res.data.access_token});
+                        localStorage.setItem("user", JSON.stringify(data));
+                        navigate("/");
+                    }
+                }).catch(err => {
+                    console.log(err);
+                })
+            }
+        } else {
+            alert('이메일 형식이 올바르지 않습니다.');
         }
-    } else {
-        alert('이메일 형식이 올바르지 않습니다.');
-    }
 
     }
 
@@ -82,7 +81,8 @@ function Login() {
                     <div class="login-input-container">
                         <div class="login-input-wrap input-id">
                             <i class="far fa-envelope"></i>
-                            <input placeholder="Email" type="text" name='input_email' value={inputEmail} onChange={handleEmailChange} />
+                            <input placeholder="Email" type="text" name='input_email' value={inputEmail}
+                                   onChange={handleEmailChange}/>
                         </div>
                     </div>
                     <div class="login-btn-wrap">

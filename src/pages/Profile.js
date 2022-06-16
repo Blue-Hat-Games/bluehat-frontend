@@ -1,16 +1,15 @@
 import Navbar from '../components/Navbar';
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
 import '../css/Market.css';
-import { Nav, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import {Button, Nav} from 'react-bootstrap';
+import {Link, useNavigate} from 'react-router-dom';
 import Footer from '../components/Footer';
 
 const authHeader = () => {
     const user = JSON.parse(JSON.parse(localStorage.getItem("user")));
     if (user && user.accessToken) {
-        return { "Authorization": user.accessToken };
+        return {"Authorization": user.accessToken};
     } else {
         return {};
     }
@@ -27,14 +26,14 @@ class Profile extends Component {
         order: 'Newest',
         login: false,
         headers: {},
-        username : '',
-        usercoin : 0
+        username: '',
+        usercoin: 0
     };
 
     checkLogin = async () => {
         const user = JSON.parse(JSON.parse(localStorage.getItem("user")));
         if (user && user.accessToken) {
-            this.setState({ login: true});
+            this.setState({login: true});
         } else {
             alert('Please login first');
             const navigate = useNavigate();
@@ -45,7 +44,7 @@ class Profile extends Component {
     getUserInfo = async () => {
         axios.get('/users', {
             headers: authHeader()
-        }).then(({ data }) => {
+        }).then(({data}) => {
             this.setState({
                 username: data.username,
                 usercoin: data.coin
@@ -58,7 +57,7 @@ class Profile extends Component {
     getUserItemCount = async () => {
         axios.get('/nft/user/animal/count', {
             headers: authHeader()
-        }).then(({ data }) => {
+        }).then(({data}) => {
             this.setState({
                 count: data.data.totalCount
             })
@@ -70,17 +69,17 @@ class Profile extends Component {
     loadUserItem = async () => {
         axios.get(`/nft/user/animal?order=${this.state.order}&limit=${this.state.limit}&page=${this.state.page}`, {
             headers: authHeader()
-        }).then(({ data }) => {
-            this.setState({ ItemList: data });
-        }
+        }).then(({data}) => {
+                this.setState({ItemList: data});
+            }
         ).catch(err => {
             console.log(err);
-            this.setState({ loading: false });
+            this.setState({loading: false});
         })
     }
 
     setPage = async (page) => {
-        await this.setState({ page: page })
+        await this.setState({page: page})
         this.loadItem();
     }
 
@@ -89,7 +88,7 @@ class Profile extends Component {
         alert('logout');
     }
 
-    Pagenation({ total, limit, page, setPage }) {
+    Pagenation({total, limit, page, setPage}) {
         const numPages = Math.ceil(total / limit);
         return (
             <>
@@ -126,15 +125,15 @@ class Profile extends Component {
     render() {
         return (
             <div>
-                <Navbar />
+                <Navbar/>
                 <div className="user-info">
-                        <h3 className='user-name'>{this.state.username}</h3>
-                        <h6>Created at 4 month ago</h6>
-                        <h6>4 items</h6>
-                        <h6>Coin : {this.state.usercoin}</h6>
-                        <h6></h6>
-                        <Button onClick={this.logout}>Logout</Button>
-                    </div>
+                    <h3 className='user-name'>{this.state.username}</h3>
+                    <h6>Joined 4 month ago</h6>
+                    <h6>4 items</h6>
+                    <h6>Coin : {this.state.usercoin}</h6>
+                    <h6></h6>
+                    <Button onClick={this.logout}>Logout</Button>
+                </div>
                 <div className="item-list">
                     <div className="item-container" class='container'>
                         <div className="item-list-title" class='row row-cols-6'>
@@ -154,17 +153,17 @@ class Profile extends Component {
                         </div>
                     </div>
                 </div>
-                <this.Pagenation total={this.state.count} limit={this.state.limit} page={this.state.page} setPage={this.setPage} />
+                <this.Pagenation total={this.state.count} limit={this.state.limit} page={this.state.page}
+                                 setPage={this.setPage}/>
                 <Footer/>
 
-                
+
             </div>
 
         )
     }
 
 }
-
 
 
 export default Profile;

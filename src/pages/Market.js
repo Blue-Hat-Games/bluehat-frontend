@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
 import '../css/Market.css';
-import { Nav, Button } from 'react-bootstrap';
+import {Button, Nav} from 'react-bootstrap';
 import Navbar from '../components/Navbar';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 class Market extends Component {
     state = {
@@ -11,13 +11,13 @@ class Market extends Component {
         ItemList: [],
         img: ['images/bird.webp', 'images/cow.webp', 'images/duck.webp'],
         count: 0,
-        limit: 10,
+        limit: 20,
         page: 1,
         order: 'Newest'
     };
 
     getItemCount = async () => {
-        axios.get('/market/counts').then(({ data }) => {
+        axios.get('/market/counts').then(({data}) => {
             this.setState({
                 count: data.data.totalCount
             })
@@ -27,21 +27,21 @@ class Market extends Component {
     }
 
     loadItem = async () => {
-        axios.get(`/market/list?order=${this.state.order}&limit=${this.state.limit}&page=${this.state.page}`).then(({ data }) => {
-            this.setState({ ItemList: data });
-        }
+        axios.get(`/market/list?order=${this.state.order}&limit=${this.state.limit}&page=${this.state.page}`).then(({data}) => {
+                this.setState({ItemList: data});
+            }
         ).catch(err => {
             console.log(err);
-            this.setState({ loading: false });
+            this.setState({loading: false});
         })
     }
 
     setPage = async (page) => {
-        await this.setState({ page: page })
+        await this.setState({page: page})
         this.loadItem();
     }
 
-    Pagenation({ total, limit, page, setPage }) {
+    Pagenation({total, limit, page, setPage}) {
         const numPages = Math.ceil(total / limit);
         return (
             <>
@@ -76,7 +76,7 @@ class Market extends Component {
     render() {
         return (
             <div>
-                <Navbar />
+                <Navbar/>
                 <div className="item-list">
                     <div className="item-container" class='card-group'>
                         <div className="item-list-title" class='row row-cols-6'>
@@ -91,11 +91,11 @@ class Market extends Component {
                                             <div className="item-title">{item.animal_name}</div>
                                             <table>
                                                 <tr>
-                                                    <td >
-                                                    <div className="item-price">Price : {item.price}</div>
+                                                    <td>
+                                                        <div className="item-price">Price : {item.price}</div>
                                                     </td>
                                                     <td className='td-end'>
-                                                    <div className="item-view">View : {item.view_count}</div>
+                                                        <div className="item-view">View : {item.view_count}</div>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -106,14 +106,14 @@ class Market extends Component {
                         </div>
                     </div>
                 </div>
-                <this.Pagenation total={this.state.count} limit={this.state.limit} page={this.state.page} setPage={this.setPage} />
+                <this.Pagenation total={this.state.count} limit={this.state.limit} page={this.state.page}
+                                 setPage={this.setPage}/>
             </div>
 
         )
     }
 
 }
-
 
 
 export default Market;

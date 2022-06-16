@@ -4,8 +4,8 @@ import '../css/About.css';
 
 const User = () => {
     return (
-        <div >
-            <Navbar />
+        <div>
+            <Navbar/>
         </div>
 
     )

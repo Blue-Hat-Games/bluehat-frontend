@@ -4,8 +4,8 @@ import Navbar from '../components/Navbar';
 
 const Download = () => {
     return (
-        <div >
-            <Navbar />
+        <div>
+            <Navbar/>
             <header class="showcase">
                 <div class="showcase-content">
                     <h1>Bluehat Games</h1>

@@ -1,36 +1,36 @@
 
-.Page{
+.Page {
     padding: 5%;
 }
 
-.card{
-    padding : 5px;
+.card {
+    padding: 5px;
     margin: 10px
 }
 
-.item-user{
+.item-user {
     color: #636363;
     font-size: 12px;
 }
 
-.item-price{
+.item-price {
     color: #636363;
     font-size: 12px;
     text-align: end;
 }
 
-.item-title{
+.item-title {
     color: #282828;
     font-size: 14px;
 }
 
-.item-view{
+.item-view {
     color: #636363;
     font-size: 12px;
     text-align: end;
 }
 
-.item-container{
+.item-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -38,17 +38,21 @@
     padding: 10px;
     margin: auto;
 }
-table{
+
+table {
     border-collapse: collapse;
     width: 100%;
 }
-th,td{
+
+th, td {
     text-align: left;
 }
-.td-end{
+
+.td-end {
     text-align: right;
 }
-.Pagenation{
+
+.Pagenation {
     display: flex;
     flex-direction: row;
     justify-content: center;

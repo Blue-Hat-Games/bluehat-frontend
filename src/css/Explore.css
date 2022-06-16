@@ -1,26 +1,27 @@
 
-.repairing{
+.repairing {
     vertical-align: center;
     position: relative;
     align-items: center;
     margin-top: 100px;
 }
+
 .img {
     width: 40rem;
     height: auto;
-    margin:auto;
+    margin: auto;
 }
 
-.title{
+.title {
     color: #636363;
-    margin:auto;
+    margin: auto;
     text-align: center;
     margin-top: 50px;
 }
 
-.content{
+.content {
     color: #636363;
-    margin:auto;
+    margin: auto;
     text-align: center;
     font-size: 16px;
     margin-top: 20px;

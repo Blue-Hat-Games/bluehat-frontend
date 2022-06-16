@@ -1,30 +1,31 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
-*{
-  text-decoration-line: none !important;
-  color: inherit;
+
+* {
+    text-decoration-line: none !important;
+    color: inherit;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
 }
 
 .App-header {
-  background-color: #FFFFFF;
+    background-color: #FFFFFF;
 }
 
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
 
-  to {
-    transform: rotate(360deg);
-  }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 
