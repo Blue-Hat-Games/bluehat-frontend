@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {useNavigate} from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import '../css/Login.css';
 
@@ -26,7 +26,7 @@ function Login() {
         }).then(res => {
             console.log(res);
             if (res.status === 200 || res.status === 201) {
-                const data = JSON.stringify({accessToken: res.data.access_token});
+                const data = JSON.stringify({ accessToken: res.data.access_token });
                 localStorage.setItem("user", JSON.stringify(data));
                 navigate("/");
             }
@@ -64,7 +64,7 @@ function Login() {
                 }).then(res => {
                     console.log(res);
                     if (res.status === 200 || res.status === 201) {
-                        const data = JSON.stringify({accessToken: res.data.access_token});
+                        const data = JSON.stringify({ accessToken: res.data.access_token });
                         localStorage.setItem("user", JSON.stringify(data));
                         navigate("/");
                     }
@@ -78,6 +78,9 @@ function Login() {
 
     }
 
+    const onClickSignUp = () => {
+        navigate("/");
+    }
 
     return (
         <div class="page-container">
@@ -92,13 +95,13 @@ function Login() {
                 <div class="login-form-left-side">
                     <div class="login-top-wrap">
                         <span>Don't have an account?</span>
-                        <button class="create-account-btn shadow-light">Create Profile</button>
+                        <button class="create-account-btn shadow-light" onClick={onClickSignUp}>Create Profile</button>
                     </div>
                     <div class="login-input-container">
                         <div class="login-input-wrap input-id">
                             <i class="far fa-envelope"></i>
                             <input placeholder="Email" type="text" name='input_email' value={inputEmail}
-                                   onChange={handleEmailChange}/>
+                                onChange={handleEmailChange} />
                         </div>
                     </div>
                     <div class="login-btn-wrap">
